@@ -160,9 +160,80 @@ const Ex6 = function() {
     )
 }
 
+
+// Exercice 7
+// Update the p tag to reflect how many times a button was clicked
+// initial value should be 0
+
+const Ex7 = function() {
+    const [count, setCount] = useState(0)
+    return (
+        <div>
+          <p>{count}</p>
+          <button onClick={() => setCount(count + 1)}>
+            click me
+          </button>
+        </div>
+    )
+}
+
+// Exercice 8
+// Setup
+  // Add to button tags to the component (3 in total)
+  // first button text value is "fruit"
+  // first button text value is "meat"
+  // first button text value is "vegetables"
+// Goal
+  // Set the p tag text to: "I like ..." where ... is the text value of the button
+
+const Ex8 = function() {
+    const [text, setText] = useState('')
+    return (
+        <div>
+          <p>I like {text}</p>
+          <button onClick={() => setText("fruit")}>
+            fruit
+          </button>
+          <button onClick={() => setText('meat')}>
+            meat
+          </button>
+          <button onClick={() => setText('vegetables')}>
+            vegetables
+          </button>
+        </div>
+    )
+}
+
+// Exercice 9
+// Setup
+  // Still remove one button element (keep only two)
+  // The first button text value is "UPPER"
+  // The second button text value is "LOWER"
+  // initial value of the p tag is 'Last click:'
+// Goal
+  // On clicking any of the buttons
+  // the p tag value should indicate which one of the buttons was clicked last
+  // Append it to the initial 'Last click'
+
+const Ex9 = function() {
+    const [text, setText] = useState('')
+    return (
+        <div>
+          <p>Last click: {text}</p>
+          <button onClick={() => setText("UPPER")}>
+            UPPER
+          </button>
+          <button onClick={() => setText('LOWER')}>
+            LOWER
+          </button>
+        </div>
+    )
+}
+
+
 // Exercice x
 // Write a component that changes text to a passed down prop
 
 
-export { Ex1, Ex2, Ex3, Ex4, Ex5, Ex6 };
+export { Ex1, Ex2, Ex3, Ex4, Ex5, Ex6, Ex7, Ex8, Ex9 };
 

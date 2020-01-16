@@ -1,6 +1,6 @@
 import React from 'react';
 import { render, fireEvent } from '@testing-library/react';
-import { Ex1, Ex2, Ex3, Ex4, Ex5, Ex6 } from './hooks';
+import { Ex1, Ex2, Ex3, Ex4, Ex5, Ex6, Ex7, Ex8, Ex9 } from './hooks';
 
 test('Exercice 1', () => {
   const { getByText } = render(<Ex1 />);
@@ -133,5 +133,48 @@ test('Exercice 6', () => {
   fireEvent.click(button)
 
   getByText('5');
+
+});
+
+test('Exercice 7', () => {
+  const { getByText } = render(<Ex7 />);
+
+  getByText("0")
+
+  // click on button
+  const button = getByText(/click me/i)
+  fireEvent.click(button)
+
+  // find count
+  getByText("1")
+  fireEvent.click(button)
+  fireEvent.click(button)
+  fireEvent.click(button)
+  fireEvent.click(button)
+  getByText("5")
+
+});
+
+test('Exercice 8', () => {
+  const { getByText, getAllByRole} = render(<Ex8 />);
+
+  const buttons = getAllByRole('button')
+
+  buttons.forEach((button, i) => {
+    fireEvent.click(button)
+    getByText("I like " + button.textContent)
+  })
+
+});
+
+test('Exercice 9', () => {
+  const { getByText, getAllByRole} = render(<Ex9 />);
+
+  const buttons = getAllByRole('button')
+
+  buttons.forEach((button, i) => {
+    fireEvent.click(button)
+    getByText("Last click: " + button.textContent)
+  })
 
 });
