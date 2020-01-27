@@ -1,6 +1,6 @@
 import React from 'react';
 import { render, fireEvent } from '@testing-library/react';
-import { Ex1, Ex2, Ex3, Ex4, Ex5, Ex6, Ex7, Ex8, Ex9 } from './hooks';
+import { Ex1, Ex2, Ex3, Ex4, Ex5, Ex6, Ex7, Ex8, Ex9, Ex10, Ex11, Ex12, Ex13, Ex14 } from './hooks';
 
 test('Exercice 1', () => {
   const { getByText } = render(<Ex1 />);
@@ -37,7 +37,6 @@ test('Exercice 2', () => {
   getByText(/Hello 世界/i);
 
 });
-
 
 test('Exercice 3', () => {
   const { getByText } = render(<Ex3 />);
@@ -83,7 +82,6 @@ test('Exercice 4', () => {
 
 });
 
-
 test('Exercice 5', () => {
   const { getByText } = render(<Ex5 />);
 
@@ -102,8 +100,6 @@ test('Exercice 5', () => {
   getByText('2');
 
 });
-
-
 
 test('Exercice 6', () => {
   const { getByText } = render(<Ex6 />);
@@ -178,3 +174,114 @@ test('Exercice 9', () => {
   })
 
 });
+
+test('Exercice 10', () => {
+  const { queryByText, getByText, getByRole} = render(<Ex10 />);
+
+  getByText("docker")
+  getByText("kubernetes")
+
+  expect(queryByText("containerd")).toBeNull()
+  const button = getByRole('button')
+
+  fireEvent.click(button)
+  getByText("containerd")
+
+});
+
+test('Exercice 11', () => {
+  const { queryByText, getByText, getByRole} = render(<Ex11 />);
+
+  const default_list = ['ipsizzle', 'nullizzle', 'sapizzle', 'velizzle', 'crackalackin', 'maurizzle', 'rhoncizzle']
+
+  default_list.forEach(item => expect(queryByText(item)).toBeNull())
+  
+  const button = getByRole('button')
+
+  for(let i = 0, length1 = default_list.length; i < length1-2; i++){
+    fireEvent.click(button)
+    for(let j = 0; j <= i; j++){
+      getByText(default_list[j])
+    }
+    default_list.slice(i+2).forEach(item => expect(queryByText(item)).toBeNull())
+
+  }
+});
+
+test('Exercice 12', () => {
+  const my_list = ['surf', 'fencing', 'taekwondo']
+  const { queryByText, getByText, getByRole} = render(<Ex12 base_list={my_list}/>);
+
+  my_list.forEach(item => expect(queryByText(item)).toBeNull())
+  
+  const button = getByRole('button')
+
+  for(let i = 0, length1 = my_list.length; i < length1-2; i++){
+    fireEvent.click(button)
+    for(let j = 0; j <= i; j++){
+      getByText(my_list[j])
+    }
+    my_list.slice(i+2).forEach(item => expect(queryByText(item)).toBeNull())
+
+  }
+});
+
+test('Exercice 13', () => {
+  const default_list = ['ipsizzle', 'nullizzle', 'sapizzle', 'velizzle', 'crackalackin', 'maurizzle', 'rhoncizzle']
+  const { queryByText, getByText, getByRole} = render(<Ex13/>);
+
+  default_list.forEach(item => expect(queryByText(item)).toBeNull())
+  
+  const addButton = getByText('Add element')
+  const removeButton = getByText('Remove element')
+
+  for(let i = 0, length1 = default_list.length; i < length1-2; i++){
+    fireEvent.click(addButton)
+    for(let j = 0; j <= i; j++){
+      getByText(default_list[j])
+    }
+    default_list.slice(i+2).forEach(item => expect(queryByText(item)).toBeNull())
+  }
+
+  // fast & furious testing
+
+  fireEvent.click(removeButton)
+  fireEvent.click(removeButton)
+  fireEvent.click(removeButton)
+  fireEvent.click(removeButton)
+  
+  getByText('ipsizzle')
+  getByText('nullizzle')
+  getByText('sapizzle')
+  default_list.slice(3).forEach(item => expect(queryByText(item)).toBeNull())
+
+});
+
+test('Exercice 14', () => {
+  const my_list = ['surf', 'fencing', 'taekwondo']
+  const { queryByText, getByText, getByRole} = render(<Ex14 base_list={my_list}/>);
+
+  my_list.forEach(item => expect(queryByText(item)).toBeNull())
+  
+  const addButton = getByText('Add element')
+  const removeButton = getByText('Remove element')
+
+  for(let i = 0, length1 = my_list.length; i < length1-2; i++){
+    fireEvent.click(addButton)
+    for(let j = 0; j <= i; j++){
+      getByText(my_list[j])
+    }
+    my_list.slice(i+2).forEach(item => expect(queryByText(item)).toBeNull())
+  }
+
+  // fast & furious testing
+
+  fireEvent.click(removeButton)
+  fireEvent.click(removeButton)
+
+  
+  getByText('surf')
+  my_list.slice(1).forEach(item => expect(queryByText(item)).toBeNull())
+
+});
+

@@ -231,9 +231,195 @@ const Ex9 = function() {
 }
 
 
-// Exercice x
-// Write a component that changes text to a passed down prop
+// Exercice 10
+// Setup (start from the Base component)
+  // replace the p tag with an unordered list tag. 
+  // add two lists elements within the unordered list. One that has "docker" as value the other "kubernetes".
+  // Set the text of the button element to "Add element"
+// Goal
+  // On button click, a new list item should be appended in the unordered list. It should have as value "containerd"
+
+const Ex10 = function() {
+  const [items, setItems] = useState(['docker', 'kubernetes'])
+  return (
+    <div>
+      <ul>
+        {
+          items.map((item, idx) => <li key={idx}>{item}</li> )
+        }
+      </ul>
+      <button onClick={() => setItems(['docker', 'kubernetes', 'containerd'])}>
+        Add element
+      </button>
+    </div>
+  )
+}
+
+// Exercice 11
+// Setup (start from the Base component)
+  // replace the p tag with an unordered list tag. 
+  // Keep the unordered list empty
+  // Set the text of the button element to "Add element"
+// Goal
+  // On button click, a new item is added to the unordered list.
+  // The value of the item is taken from the following list (keep the order!) :
+  // ipsizzle
+  // nullizzle
+  // sapizzle
+  // velizzle
+  // crackalackin
+  // maurizzle
+  // rhoncizzle
+
+const Ex11 = function() {
+  const default_list = ['ipsizzle', 'nullizzle', 'sapizzle', 'velizzle', 'crackalackin', 'maurizzle', 'rhoncizzle']
+  const [items, setItems] = useState([])
+  const [idx, setIdx] = useState(1)
+  return (
+    <div>
+      <ul>
+        {
+          items.map((item, idx) => <li key={idx}>{item}</li> )
+        }
+      </ul>
+      <button onClick={() => {
+        setIdx(idx+1)
+        setItems(default_list.slice(0, idx))
+      }}>
+        Add element
+      </button>
+    </div>
+  )
+}
+
+// Exercice 12
+// Setup (start from the Base component)
+  // replace the p tag with an unordered list tag. 
+  // Keep the unordered list empty
+  // Set the text of the button element to "Add element"
+// Goal
+  // Same as previous exercice, but this time the list is passed as a props
+
+const Ex12 = function({base_list}) {
+  const [items, setItems] = useState([])
+  const [idx, setIdx] = useState(1)
+  return (
+    <div>
+      <ul>
+        {
+          items.map((item, idx) => <li key={idx}>{item}</li> )
+        }
+      </ul>
+      <button onClick={() => {
+        setIdx(idx+1)
+        setItems(base_list.slice(0, idx))
+      }}>
+        Add element
+      </button>
+    </div>
+  )
+}
+
+// Exercice 13
+// Setup (start from the Ex11 component)
+  // Add an extra button element with the text "Remove element"
+// Goal
+  // On "Add element" button click, a new item is added to the unordered list.
+  // On "Remove element" button click, a new item is added to the unordered list.
+  // Use the same list as in exercice 11
 
 
-export { Ex1, Ex2, Ex3, Ex4, Ex5, Ex6, Ex7, Ex8, Ex9 };
+const Ex13 = function() {
+  const default_list = ['ipsizzle', 'nullizzle', 'sapizzle', 'velizzle', 'crackalackin', 'maurizzle', 'rhoncizzle']
+  const [items, setItems] = useState([])
+  const [idx, setIdx] = useState(1)
+  return (
+    <div>
+      <ul>
+        {
+          items.map((item, idx) => <li key={idx}>{item}</li> )
+        }
+      </ul>
+      <button onClick={() => {
+        setIdx(idx+1)
+        setItems(default_list.slice(0, idx))
+      }}>
+        Add element
+      </button>
+      <button onClick={() => {
+        setIdx(idx-1)
+        setItems(default_list.slice(0, idx))
+      }}>
+        Remove element
+      </button>
+    </div>
+  )
+}
+
+// Exercice 14
+// Setup
+  // Same as Ex13
+// Goal
+  // Same as previous ex, but this time the list is passed as a props
+
+const Ex14 = function({base_list}) {
+  const [items, setItems] = useState([])
+  const [idx, setIdx] = useState(1)
+  return (
+    <div>
+      <ul>
+        {
+          items.map((item, idx) => <li key={idx}>{item}</li> )
+        }
+      </ul>
+      <button onClick={() => {
+        setIdx(idx+1)
+        setItems(base_list.slice(0, idx))
+      }}>
+        Add element
+      </button>
+      <button onClick={() => {
+        setIdx(idx-1)
+        setItems(base_list.slice(0, idx))
+      }}>
+        Remove element
+      </button>
+    </div>
+  )
+}
+
+
+export { Ex1, Ex2, Ex3, Ex4, Ex5, Ex6, Ex7, Ex8, Ex9, Ex10, Ex11, Ex12, Ex13, Ex14 };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
